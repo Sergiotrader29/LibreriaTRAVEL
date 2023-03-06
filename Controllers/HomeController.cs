@@ -1,5 +1,7 @@
 ﻿using Library.Models;
+using Library.Servicios;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
 using System.Diagnostics;
 
 namespace Library.Controllers
@@ -7,10 +9,16 @@ namespace Library.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IrepositorioLibreria irepositorioLibreria;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+        }
+
+        public HomeController(IrepositorioLibreria irepositorioLibreria)
+        {
+            this.irepositorioLibreria = irepositorioLibreria;
         }
 
         public IActionResult Index()
@@ -32,10 +40,13 @@ namespace Library.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(Autor autor)
+        public IActionResult AñadirLibro(Libro libroVM)
         {
-
-            return View();
+            if (ModelState.IsValid)
+            {
+                
+                return View();
+            }
         }
     }
 }

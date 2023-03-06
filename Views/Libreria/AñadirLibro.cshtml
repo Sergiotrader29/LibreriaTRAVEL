@@ -1,0 +1,91 @@
+﻿@model Library.Models.Libro
+
+@{
+    ViewData["Title"] = "Crear libro";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <label>Título</label>
+        @Html.TextBoxFor(m => m.Titulo, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Titulo, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Editoriales</label>
+        @Html.DropDownListFor(m => m.Editoriales, new SelectList(Model.Editoriales, "Id", "NombreEditorial"), "Seleccione una editorial", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Editoriales, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Sinopsis</label>
+        @Html.TextBoxFor(m => m.Sinopsis, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Sinopsis, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Número de páginas</label>
+        @Html.TextBoxFor(m => m.n_paginas, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.n_paginas, "", new { @class = "text-danger" })
+    </div>
+
+    <hr />
+
+    <h4>Autores</h4>
+
+    <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" name="autor-nombre" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Apellido</label>
+        <input type="text" name="autor-apellido" class="form-control" />
+    </div>
+
+    <button type="button" id="btnAgregarAutor" class="btn btn-primary">Agregar autor</button>
+
+    <hr />
+
+    <table class="table" id="tblAutores">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-success">Guardar libro</button>
+}
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#btnAgregarAutor").click(function () {
+                var nombre = $("input[name=autor-nombre]").val();
+                var apellido = $("input[name=autor-apellido]").val();
+
+                if (nombre !== "" && apellido !== "") {
+                    var row = "<tr><td>" + nombre + "</td><td>" + apellido + "</td><td><button type='button' class='btn btn-danger btnEliminarAutor'>Eliminar</button></td></tr>";
+                    $("#tblAutores tbody").append(row);
+                }
+
+                $("input[name=autor-nombre]").val("");
+                $("input[name=autor-apellido]").val("");
+            });
+
+            $(document).on("click", ".btnEliminarAutor", function () {
+                $(this).closest("tr").remove();
+            });
+        });
+    </script>
+}
