@@ -1,91 +1,45 @@
-﻿@model Library.Models.Libro
+﻿@model Libro
 
-@{
-    ViewData["Title"] = "Crear libro";
-}
+<h2>Añadir libro</h2>
 
-<h1>@ViewData["Title"]</h1>
-
-<hr />
-
-@using (Html.BeginForm())
-{
-    <div class="form-group">
-        <label>Título</label>
-        @Html.TextBoxFor(m => m.Titulo, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Titulo, "", new { @class = "text-danger" })
+<form asp-action="AñadirLibro">
+    <div class="mb-3">
+        <label asp-for="Titulo" class="form-label"></label>
+        <input type="text" asp-for="Titulo" class="form-control" />
+        <span asp-validation-for="Titulo" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label>Editoriales</label>
-        @Html.DropDownListFor(m => m.Editoriales, new SelectList(Model.Editoriales, "Id", "NombreEditorial"), "Seleccione una editorial", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Editoriales, "", new { @class = "text-danger" })
+    <div class="mb-3">
+        <label asp-for="Autor.Nombre" class="form-label"></label>
+        <input type="text" asp-for="Autor.Nombre" class="form-control" />
+        <span asp-validation-for="Autor.Nombre" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label>Sinopsis</label>
-        @Html.TextBoxFor(m => m.Sinopsis, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Sinopsis, "", new { @class = "text-danger" })
+    <div class="mb-3">
+        <label asp-for="Autor.Apellido" class="form-label"></label>
+        <input type="text" asp-for="Autor.Apellido" class="form-control" />
+        <span asp-validation-for="Autor.Apellido" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label>Número de páginas</label>
-        @Html.TextBoxFor(m => m.n_paginas, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.n_paginas, "", new { @class = "text-danger" })
+    <div class="mb-3">
+        <label asp-for="Editoriales" class="form-label"></label>
+        <input type="text" asp-for="Editoriales" class="form-control" />
+        <span asp-validation-for="Editoriales" class="text-danger"></span>
     </div>
 
-    <hr />
-
-    <h4>Autores</h4>
-
-    <div class="form-group">
-        <label>Nombre</label>
-        <input type="text" name="autor-nombre" class="form-control" />
+    <div class="mb-3">
+        <label asp-for="Sinopsis" class="form-label"></label>
+        <textarea asp-for="Sinopsis" class="form-control"></textarea>
+        <span asp-validation-for="Sinopsis" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label>Apellido</label>
-        <input type="text" name="autor-apellido" class="form-control" />
+    <div class="mb-3">
+        <label asp-for="n_paginas" class="form-label"></label>
+        <input type="number" asp-for="n_paginas" class="form-control" />
+        <span asp-validation-for="n_paginas" class="text-danger"></span>
     </div>
 
-    <button type="button" id="btnAgregarAutor" class="btn btn-primary">Agregar autor</button>
-
-    <hr />
-
-    <table class="table" id="tblAutores">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
-    <button type="submit" class="btn btn-success">Guardar libro</button>
-}
-
-@section scripts{
-    <script>
-        $(document).ready(function () {
-            $("#btnAgregarAutor").click(function () {
-                var nombre = $("input[name=autor-nombre]").val();
-                var apellido = $("input[name=autor-apellido]").val();
-
-                if (nombre !== "" && apellido !== "") {
-                    var row = "<tr><td>" + nombre + "</td><td>" + apellido + "</td><td><button type='button' class='btn btn-danger btnEliminarAutor'>Eliminar</button></td></tr>";
-                    $("#tblAutores tbody").append(row);
-                }
-
-                $("input[name=autor-nombre]").val("");
-                $("input[name=autor-apellido]").val("");
-            });
-
-            $(document).on("click", ".btnEliminarAutor", function () {
-                $(this).closest("tr").remove();
-            });
-        });
-    </script>
-}
+    <button type="submit" class="btn btn-primary" asp-controller="Libreria" asp-action="AñadirLibro">Guardar</button>
+   
+      <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Cancelar</a>
+</form>

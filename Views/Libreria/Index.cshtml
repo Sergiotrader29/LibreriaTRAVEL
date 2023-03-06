@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Autor>
+
+<h1>Resultados de búsqueda</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Título</th>
+            <th>Sinopsis</th>
+            <th>Número de Páginas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var libro in Model)
+        {
+            <tr>
+                <td>@libro.Id</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
+

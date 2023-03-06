@@ -9,17 +9,14 @@ namespace Library.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IrepositorioLibreria irepositorioLibreria;
+        
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        public HomeController(IrepositorioLibreria irepositorioLibreria)
-        {
-            this.irepositorioLibreria = irepositorioLibreria;
-        }
+
 
         public IActionResult Index()
         {
@@ -39,14 +36,6 @@ namespace Library.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [HttpPost]
-        public IActionResult AñadirLibro(Libro libroVM)
-        {
-            if (ModelState.IsValid)
-            {
-                
-                return View();
-            }
-        }
+       
     }
 }
