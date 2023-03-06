@@ -1,0 +1,25 @@
+﻿@model Autor
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Ingresar Nombre del autor y Apellido</h1>
+
+
+<form asp-action="Index">
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input type="text" asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Apellido" class="form-label"></label>
+        <input type="text" asp-for="Apellido" class="form-control" />
+        <span asp-validation-for="Apellido" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Buscar</button>
+    <a class="btn btn-secondary" asp-action="Index">Añadir</a>
+</form>
