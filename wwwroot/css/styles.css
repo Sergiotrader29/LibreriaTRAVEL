@@ -1,0 +1,18 @@
+﻿.tabla-autores {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    .tabla-autores th, .tabla-autores td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    .tabla-autores th {
+        background-color: #333;
+        color: white;
+    }
+
+    .tabla-autores tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }

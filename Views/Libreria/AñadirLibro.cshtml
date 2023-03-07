@@ -2,7 +2,7 @@
 
 <h2>Añadir libro</h2>
 
-<form asp-action="AñadirLibro">
+<form asp-controller="Libreria" asp-action="Index">
     <div class="mb-3">
         <label asp-for="Titulo" class="form-label"></label>
         <input type="text" asp-for="Titulo" class="form-control" />
@@ -22,9 +22,9 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="Editoriales" class="form-label"></label>
-        <input type="text" asp-for="Editoriales" class="form-control" />
-        <span asp-validation-for="Editoriales" class="text-danger"></span>
+        <label asp-for="n_paginas" class="form-label"></label>
+        <input type="number" asp-for="n_paginas" class="form-control" />
+        <span asp-validation-for="n_paginas" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
@@ -34,12 +34,20 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="n_paginas" class="form-label"></label>
-        <input type="number" asp-for="n_paginas" class="form-control" />
-        <span asp-validation-for="n_paginas" class="text-danger"></span>
+        <label asp-for="editoriales.NombreEditorial" class="form-label"></label>
+        <input type="text" asp-for="editoriales.NombreEditorial" class="form-control" />
+        <span asp-validation-for="editoriales.NombreEditorial" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary" asp-controller="Libreria" asp-action="AñadirLibro">Guardar</button>
+    <div class="mb-3">
+        <label asp-for="editoriales.Sede" class="form-label"></label>
+        <input type="text" asp-for="editoriales.Sede" class="form-control" />
+        <span asp-validation-for="editoriales.Sede" class="text-danger"></span>
+    </div>
+  
+
+    <button type="submit" class="btn btn-primary" asp-controller="Libreria" asp-action="AñadirLibro" 
+     >Guardar</button>
    
       <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Cancelar</a>
 </form>

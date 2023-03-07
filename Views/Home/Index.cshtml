@@ -7,7 +7,7 @@
 <h1>Ingresar Nombre del autor y Apellido</h1>
 
 
-<form asp-action="Index">
+<form asp-controller="Libreria" asp-action="BusquedaAutor" method="get">
     <div class="mb-3">
         <label asp-for="Nombre" class="form-label"></label>
         <input type="text" asp-for="Nombre" class="form-control" />
@@ -20,6 +20,6 @@
         <span asp-validation-for="Apellido" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary" asp-controller="Libreria" asp-action="Index">Buscar</button>
+    <button type="submit" class="btn btn-primary" >Buscar</button>
     <a class="btn btn-secondary" asp-controller="Libreria" asp-action="AñadirLibro">Añadir Libro</a>
 </form>

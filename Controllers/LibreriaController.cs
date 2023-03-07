@@ -23,13 +23,25 @@ namespace Library.Controllers
             return View();
         }
 
+        public IActionResult BusquedaAutor()
+        {
+            return View();
+        }
+
 
 
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var autores = await repositorioLibreria.Buscar();
-            return View(autores);
+            var autoresconlibros = await repositorioLibreria.Buscar();
+            return View(autoresconlibros);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> BusquedaAutor([FromQuery] Autor autor)
+        {
+            var busquedalibro = await repositorioLibreria.BuscarAutor(autor);
+            return View(busquedalibro);
         }
 
 
@@ -41,11 +53,9 @@ namespace Library.Controllers
                 return View();
             }
 
-            
-
             await repositorioLibreria.AñadirLibro(libro) ;
 
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
