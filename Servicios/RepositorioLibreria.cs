@@ -9,6 +9,8 @@ namespace Library.Servicios
     public interface IrepositorioLibreria
     {
         Task AñadirLibro(Libro libro);
+       
+        Task Borrar(int id);
         Task<IEnumerable<AutorConLibro>> Buscar();
        
      
@@ -27,7 +29,7 @@ namespace Library.Servicios
             using var connection = new SqlConnection(connectionString);
             return await connection.QueryAsync<AutorConLibro>
                (@" SELECT  Autor.Nombre,Autor.Apellido,Libros.Titulo,Libros.n_paginas,Libros.Sinopsis,
-        Editoriales.Editorial,Editoriales.Sede
+        Editoriales.Editorial,Editoriales.Sede,AutorConLibro.autores_id
             from AutorConLibro
             join Autor on AutorConLibro.autores_id = Autor.Id
             join Libros on AutorConLibro.libros_ISBN = Libros.ISBN
@@ -45,7 +47,8 @@ namespace Library.Servicios
             join Autor on AutorConLibro.autores_id = Autor.Id
             join Libros on AutorConLibro.libros_ISBN = Libros.ISBN
 			join Editoriales on Libros.Editoriales_ID = Editoriales.Id
-            where Autor.Nombre= @NombreAutor", new { NombreAutor = autor.Nombre });
+            where Autor.Nombre= @NombreAutor or Autor.Apellido= @ApellidoAutor"
+            , new { NombreAutor = autor.Nombre , ApellidoAutor = autor.Apellido });
 
         }
 
@@ -75,7 +78,15 @@ namespace Library.Servicios
           
         }
 
-
+        public async Task Borrar(int id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync
+                ("DELETE  from AutorConLibro where AutorConLibro.autores_id = @AutorId"
+                ,
+                new { AutorId = id }) ;
+        }
+        
 
     }
 }

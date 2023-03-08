@@ -1,6 +1,6 @@
-﻿@model List<AutorConLibro>
+﻿@model IEnumerable<AutorConLibro>
 
-<h2>Lista de autores con libros</h2>
+<h2>Resultado Busqueda</h2>
 
 <table class="tabla-autores">
     <thead>
@@ -24,8 +24,12 @@
                 <td>
                     <input type="hidden" value="@autorconlibro.autores_id" class="ids" />
                     <a class="btn btn-primary" asp-action="Editar" asp-route-id="@autorconlibro.autores_id">Editar</a>
-                    <a class="btn btn-danger" asp-action="Borrar" asp-route-id="@autorconlibro.autores_id">Borrar</a>
+                    <form method="post" asp-action="BorrarLibro" asp-route-id="@autorconlibro.autores_id">
+                        <button type="submit" class="btn btn-danger" >Borrar</button>
+                    </form>
+
                 </td>
+                
                 <td>@autorconlibro.Nombre</td>
                 <td>@autorconlibro.Apellido</td>
                 <td>@autorconlibro.Titulo</td>
@@ -39,3 +43,5 @@
         
     </tbody>
 </table>
+
+

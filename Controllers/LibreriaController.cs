@@ -28,9 +28,14 @@ namespace Library.Controllers
             return View();
         }
 
+        public IActionResult Borrar(int id)
+        {
 
+            return View();
+        }
+    
 
-        [HttpGet]
+    [HttpGet]
         public async Task<ActionResult> Index()
         {
             var autoresconlibros = await repositorioLibreria.Buscar();
@@ -55,6 +60,13 @@ namespace Library.Controllers
 
             await repositorioLibreria.AñadirLibro(libro) ;
 
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> BorrarLibro( int id)
+        {
+            await repositorioLibreria.Borrar(id);
             return RedirectToAction("Index");
         }
     }

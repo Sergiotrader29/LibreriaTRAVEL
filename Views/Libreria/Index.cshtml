@@ -1,10 +1,11 @@
-﻿@model List<AutorConLibro>
+﻿@model IEnumerable<AutorConLibro>
 
 <h2>Lista de autores con libros</h2>
 
 <table class="tabla-autores">
     <thead>
         <tr>
+            <th>Acciones</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Título del libro</th>
@@ -15,11 +16,20 @@
         </tr>
     </thead>
     <tbody>
-      
-            @foreach (var autorconlibro in Model)
-            {
-               
-                <tr>
+
+        @foreach (var autorconlibro in Model)
+        {
+
+            <tr>
+                <td>
+                    <input type="hidden" value="@autorconlibro.autores_id" class="ids" />
+                    <a class="btn btn-primary" asp-action="Editar" asp-route-id="@autorconlibro.autores_id">Editar</a>
+                    <form method="post" asp-action="BorrarLibro" asp-route-id="@autorconlibro.autores_id">
+                        <button type="submit" class="btn btn-danger">Borrar</button>
+                    </form>
+
+                </td>
+
                 <td>@autorconlibro.Nombre</td>
                 <td>@autorconlibro.Apellido</td>
                 <td>@autorconlibro.Titulo</td>
@@ -27,9 +37,11 @@
                 <td>@autorconlibro.Sinopsis</td>
                 <td>@autorconlibro.Editorial</td>
                 <td>@autorconlibro.Sede</td>
-              
-                </tr>
-            }
-        
+
+            </tr>
+        }
+
     </tbody>
 </table>
+
+

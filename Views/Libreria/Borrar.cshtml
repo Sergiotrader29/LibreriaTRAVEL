@@ -1,0 +1,12 @@
+﻿@model AutorConLibro
+
+@{
+    ViewData["Title"] = "Borrar libro";
+}
+
+<h3 class="mb-3">¿Está seguro que desea borrar el libro ?</h3>
+<form method="post" asp-action="BorrarLibro">
+    <input type="hidden" asp-for="autores_id" />
+    <button type="submit" class="btn btn-danger">Borrar</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+</form>
