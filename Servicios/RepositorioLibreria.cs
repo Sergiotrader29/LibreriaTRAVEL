@@ -40,7 +40,7 @@ namespace Library.Servicios
             using var connection = new SqlConnection(connectionString);
             return await connection.QueryAsync<AutorConLibro>
                (@" SELECT  Autor.Nombre,Autor.Apellido,Libros.Titulo,Libros.n_paginas,Libros.Sinopsis,
-        Editoriales.Editorial,Editoriales.Sede
+        Editoriales.Editorial,Editoriales.Sede,AutorConLibro.autores_id
             from AutorConLibro
             join Autor on AutorConLibro.autores_id = Autor.Id
             join Libros on AutorConLibro.libros_ISBN = Libros.ISBN
@@ -48,6 +48,7 @@ namespace Library.Servicios
             where Autor.Nombre= @NombreAutor", new { NombreAutor = autor.Nombre });
 
         }
+
 
 
         public async Task AñadirLibro(Libro libro)

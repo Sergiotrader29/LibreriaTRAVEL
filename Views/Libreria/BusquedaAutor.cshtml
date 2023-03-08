@@ -5,6 +5,7 @@
 <table class="tabla-autores">
     <thead>
         <tr>
+            <th>Acciones</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Título del libro</th>
@@ -20,6 +21,11 @@
             {
                
                 <tr>
+                <td>
+                    <input type="hidden" value="@autorconlibro.autores_id" class="ids" />
+                    <a class="btn btn-primary" asp-action="Editar" asp-route-id="@autorconlibro.autores_id">Editar</a>
+                    <a class="btn btn-danger" asp-action="Borrar" asp-route-id="@autorconlibro.autores_id">Borrar</a>
+                </td>
                 <td>@autorconlibro.Nombre</td>
                 <td>@autorconlibro.Apellido</td>
                 <td>@autorconlibro.Titulo</td>

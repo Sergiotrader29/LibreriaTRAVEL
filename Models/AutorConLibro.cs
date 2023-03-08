@@ -9,5 +9,6 @@
         public string? Editorial { get; set; }
         public string? Sinopsis { get; set; }
         public string? Sede { get; set; }
+        public int autores_id { get; set; }
     }
 }
